@@ -1,3 +1,4 @@
+import { Link } from 'lucide-react';
 import '../assets/dashboard.css'
 import profile from "../assets/images/profile.png"
 import { useState , useEffect } from 'react'
@@ -67,7 +68,7 @@ function Dashboard() {
         <>
         <div className='right'>
             <div className="head">
-                <b>Deepa Deva</b>
+                <b>Deepa</b>
                 <img className='profile' width={'55px'} src={profile} alt="pic" />
             </div>
 
@@ -95,23 +96,30 @@ function Dashboard() {
             <table className="t1">
                      <thead>
                          <tr>
+                            
                              <th>Person Name</th>
                              <th>No.of items Required</th>
-                             <th>Phone Number</th>
+                             <th>Address</th>
                              <th>Date</th>
                              <th>Status</th>
+
                          </tr>
                      </thead>
                     <tbody>
                     
                          {console.log(dashData)}
                     {dashData.data && Object.entries(dashData.data).map(([key, val]) => (
+                        // <a href='#'>
                         <tr key={key}>
-                            <td>{userDetails[val.userID] ? userDetails[val.userID].fname : "Unknown"}</td>
+                            
+                            <td> <a href='/leftside/product'>
+                                {userDetails[val.userID] ? userDetails[val.userID].fname : "Unknown"} </a>
+                            </td>
                             <td>23</td>
                             <td>{userDetails[val.userID] ? userDetails[val.userID].address : "Unknown"}</td>
                             <td>{formatted(val.createdAt)}</td>
                             <td><div className="status">{val.status}</div></td>
+                            
                         </tr>
                 ))}
 

@@ -12,7 +12,7 @@ function Product() {
 
         <div className='victim'>
             <div style={{display:'flex',flexDirection:'row'}}>
-                <p style={{fontSize:'25px',marginTop:'10px'}}><strong>Dharun</strong></p>
+                <p style={{fontSize:'25px',marginTop:'10px'}}><strong>Deepak</strong></p>
             </div>
             <div className='address'>
                 <div className='dist'> CHENNAI</div>
