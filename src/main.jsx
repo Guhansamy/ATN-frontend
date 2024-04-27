@@ -10,6 +10,7 @@ import Leftside from './components/Leftside.jsx'
 import Signup from './components/Signup.jsx'
 import Product from './pages/Product.jsx'
 import App from './App.jsx'
+import Completed from './pages/Completed.jsx'
 
 const Router = createBrowserRouter([
 	{
@@ -39,6 +40,10 @@ const Router = createBrowserRouter([
 			{
 				path:'/leftside/product',
 				element:<Product/>
+			},
+			{
+				path:'/leftside/completed',
+				element:<Completed/>
 			}
 		]
 	}

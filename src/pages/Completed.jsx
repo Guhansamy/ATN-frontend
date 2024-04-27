@@ -1,9 +1,10 @@
-import { Link } from 'lucide-react';
+import React from 'react'
 import '../assets/dashboard.css'
 import profile from "../assets/images/profile.png"
 import { useState , useEffect } from 'react'
+import { green } from '@mui/material/colors';
 
-function Dashboard() {
+function Completed() {
 
     const [dashData , setDashData] = useState([]);
     const [userDetails, setUserDetails] = useState({});
@@ -60,12 +61,11 @@ function Dashboard() {
         const formattedDate = date.toISOString().split('T')[0];
         return formattedDate;
     }
-        let c=124;
-    console.log(dashData)
+    let c=124;
+
 
   return (
-        <>
-        <div className='right'>
+    <div className='right'>
             <div className="head">
                 <b>Deepak Prakash</b>
                 <img className='profile' width={'55px'} src={profile} alt="pic" />
@@ -73,15 +73,14 @@ function Dashboard() {
 
             <div className='donate'>
                 <div>
-                <h1><b>All Donation Requests</b></h1>
-                <h4 style={{color:'green'}}>Active Members</h4>
+                <h1 style={{'color':'green'}}><b>Completed Requests</b></h1>
                 </div>
 
                 <div>
-                    <input type="text" id="inputField" placeholder='Search' style={{padding:'3px', paddingLeft:'5px',marginLeft:'500px',width:'250px'}}/>
+                    {/* <input type="text" id="inputField" placeholder='Search' style={{padding:'3px', paddingLeft:'5px',marginLeft:'500px',width:'250px'}}/> */}
                 </div>
 
-                <div>
+                <div style={{'marginLeft':'60%'}}>
                     <select id="dropdown" style={{padding:'3px', marginLeft: '30px', border: '1px solid silver',width:'150px'}}>
                         <option value="" disabled selected hidden>Filter</option>
                         <option value="Chennai">Chennai</option>
@@ -160,35 +159,33 @@ function Dashboard() {
             <table className="t1">
                      <thead>
                          <tr>
-                            
                              <th>Person Name</th>
                              <th>No.of items Required</th>
                              <th>Address</th>
                              <th>Date</th>
                              <th>Status</th>
-
                          </tr>
                      </thead>
                     <tbody>
                     
                          {console.log(dashData)}
                     {dashData.data && Object.entries(dashData.data).map(([key, val]) => ( 
+                        val.status === "Completed" && (
                         <tr key={key}>
                             <td><a href='http://localhost:5173/leftside/product'> {userDetails[val.userID] ? userDetails[val.userID].fname : "Unknown"}</a></td>
                             <td>{c-=7}</td>
                             <td>{userDetails[val.userID] ? userDetails[val.userID].address : "Unknown"}</td>
                             <td>{formatted(val.createdAt)}</td>
                             <td><div className="status">{val.status}</div></td>
-                            
                         </tr>
+                        )
                 ))}
 
 
                     </tbody>
                 </table>
         </div>
-        </>
-    )
+  )
 }
 
-export default Dashboard
+export default Completed

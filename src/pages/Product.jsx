@@ -12,7 +12,7 @@ function Product() {
 
         <div className='victim'>
             <div style={{display:'flex',flexDirection:'row'}}>
-                <p style={{fontSize:'25px',marginTop:'10px'}}><strong>Deepak</strong></p>
+                <p style={{fontSize:'25px',marginTop:'10px'}}><strong>Vijay</strong></p>
             </div>
             <div className='address'>
                 <div className='dist'> CHENNAI</div>
@@ -32,7 +32,7 @@ function Product() {
                     <td>1</td>
                     <td>Food</td>
                     <td>Rice</td>
-                    <td>14</td>
+                    <td>36</td>
                 </tr>
 
                 <tr>
@@ -44,9 +44,16 @@ function Product() {
 
                 <tr>
                     <td>3</td>
-                    <td>clothes</td>
+                    <td>Clothes</td>
                     <td>sweater</td>
-                    <td>14</td>
+                    <td>30</td>
+                </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td>Emergency Need</td>
+                    <td>Water</td>
+                    <td>47</td>
                 </tr>
         </table>
 
