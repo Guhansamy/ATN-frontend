@@ -1,12 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../assets/product.css'
 import profile from "../assets/images/profile.png"
+import { useLocation } from 'react-router-dom'
 
 function Product() {
+
+    const location = useLocation()
+    const value = location.state.val
+    const userDetails = location.state.det
+    const user_id = location.state.id
+
+    const[userValue,setUserValues] = useState({});
+
+    useEffect (() => {
+        {userDetails && Object.entries(userDetails).map(([key, val]) => {
+            if(key === user_id){
+                setUserValues(val)
+            }
+        }
+    )}
+
+    },[])
+
+    console.log(userValue,'this is userValue')
+
   return (
     <div className='right'>
         <div className="head">
-                <b>Deepak Prakash</b>
+                <b>{userValue.fname || "Unknown"}</b>
                 <img className='profile' width={'55px'} src={profile} alt="pic" />
         </div>
 
@@ -15,46 +36,33 @@ function Product() {
                 <p style={{fontSize:'25px',marginTop:'10px'}}><strong>Vijay</strong></p>
             </div>
             <div className='address'>
-                <div className='dist'> CHENNAI</div>
-                <div>ANNA SALAI , WEST THAMBARAM , 24TH </div>
+                <div className='dist'> {userValue.address  || "NA"}</div>
+                {/* <div>ANNA SALAI , WEST THAMBARAM , 24TH </div> */}
             </div>
         </div>
 
         <table className='t2'>
+            <thead>
                 <tr>
                     <th>S.NO</th>
-                    <th>Category</th>
                     <th>Product Name</th>
                     <th>Quantity</th>
                 </tr>
+                </thead>
+            <tbody>
+              
 
-                <tr>
-                    <td>1</td>
-                    <td>Food</td>
-                    <td>Rice</td>
-                    <td>36</td>
-                </tr>
+                 {value.data && Object.entries(value.data).map(([key, val],index) => ( 
+                        <tr key={key}>
+                           
+                            <td>{index + 1}</td>
+                            <td>{key}</td>
+                            <td>{val}</td>
+                            
+                        </tr>
+                ))} 
 
-                <tr>
-                    <td>2</td>
-                    <td>Medicine</td>
-                    <td>Fever Tablets</td>
-                    <td>14</td>
-                </tr>
-
-                <tr>
-                    <td>3</td>
-                    <td>Clothes</td>
-                    <td>sweater</td>
-                    <td>30</td>
-                </tr>
-
-                <tr>
-                    <td>4</td>
-                    <td>Emergency Need</td>
-                    <td>Water</td>
-                    <td>47</td>
-                </tr>
+                </tbody>
         </table>
 
     </div>

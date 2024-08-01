@@ -2,11 +2,15 @@ import { Link } from 'lucide-react';
 import '../assets/dashboard.css'
 import profile from "../assets/images/profile.png"
 import { useState , useEffect } from 'react'
-
+import { useNavigate } from 'react-router-dom';
 function Dashboard() {
 
     const [dashData , setDashData] = useState([]);
     const [userDetails, setUserDetails] = useState({});
+    const [total, setTotal] = useState(0);
+
+    const navigate = useNavigate()
+
 
     useEffect(() => {
         const fetch_data = async () => {
@@ -25,6 +29,25 @@ function Dashboard() {
 
         fetch_data();
     }, []);
+
+    // to calculate the total components
+    const findTotal = (data) => {
+        
+        let accumulatedTotal = 0
+        if (data.Clothes){
+            accumulatedTotal += parseInt(data.Clothes)
+        }
+        if (data.Medicine){
+            accumulatedTotal += parseInt(data.Medicine)
+        }
+        if (data.Water){
+            accumulatedTotal += parseInt(data.Water)
+        }
+        if (data.Food){
+            accumulatedTotal += parseInt(data.Food)
+        }
+        return accumulatedTotal
+    }
 
     useEffect(() => {
         const fetchUserDetails = async () => {
@@ -60,8 +83,20 @@ function Dashboard() {
         const formattedDate = date.toISOString().split('T')[0];
         return formattedDate;
     }
-        let c=124;
-    console.log(dashData)
+        // let c=124;
+    // console.log(dashData)
+
+    const handleOpenDetails = (val,user_det,userID) => {
+        console.log(user_det,'det----')
+        console.log(userID,'----')
+        navigate('/leftside/product',{
+            state : {
+                val:val,
+                det : user_det,
+                id : userID
+            }
+        })
+    }
 
   return (
         <>
@@ -174,8 +209,9 @@ function Dashboard() {
                          {console.log(dashData)}
                     {dashData.data && Object.entries(dashData.data).map(([key, val]) => ( 
                         <tr key={key}>
-                            <td><a href='http://localhost:5173/leftside/product'> {userDetails[val.userID] ? userDetails[val.userID].fname : "Unknown"}</a></td>
-                            <td>{c-=7}</td>
+                           
+                            <td><div onClick={() => handleOpenDetails(val,userDetails,val.userID)}>{userDetails[val.userID] ? userDetails[val.userID].fname : "Unknown"}</div></td>
+                            <td>{findTotal(val.data)}</td>
                             <td>{userDetails[val.userID] ? userDetails[val.userID].address : "Unknown"}</td>
                             <td>{formatted(val.createdAt)}</td>
                             <td><div className="status">{val.status}</div></td>
@@ -192,3 +228,4 @@ function Dashboard() {
 }
 
 export default Dashboard
+
